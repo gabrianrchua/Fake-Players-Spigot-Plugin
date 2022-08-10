@@ -1,6 +1,5 @@
 package me.KP56.FakePlayers;
 
-import de.jeff_media.updatechecker.UpdateChecker;
 import me.KP56.FakePlayers.Commands.FakePlayers;
 import me.KP56.FakePlayers.Listeners.DeathListener;
 import me.KP56.FakePlayers.Listeners.PreLoginListener;
@@ -94,61 +93,9 @@ public class Main extends JavaPlugin {
 
     private void checkForClasses() {
         try {
-            usesPaper = Class.forName("com.destroystokyo.paper.VersionHistoryManager$VersionData") != null;
-
-            if (usesPaper) {
-                Bukkit.getLogger().info("Paper detected.");
-            }
-        } catch (ClassNotFoundException ignored) {
-
-        }
-
-        try {
-            updatedPaper = Class.forName("net.kyori.adventure.text.ComponentLike") != null;
-        } catch (ClassNotFoundException ignored) {
-
-        }
-
-        try {
             usesCraftBukkit = Class.forName("org.spigotmc.SpigotConfig") == null;
         } catch (ClassNotFoundException ignored) {
             usesCraftBukkit = true;
-        }
-
-        try {
-            this.usesProtocolLib = Class.forName("com.comphenix.protocol.ProtocolLib") != null;
-        } catch (ClassNotFoundException ignored) {
-
-        }
-
-        try {
-            this.usesFastLogin = Class.forName("com.github.games647.fastlogin.bukkit.FastLoginBukkit") != null;
-        } catch (ClassNotFoundException ignored) {
-
-        }
-
-        try {
-            this.usesHamsterAPI = Class.forName("dev._2lstudios.hamsterapi.HamsterAPI") != null;
-        } catch (ClassNotFoundException ignored) {
-
-        }
-
-        try {
-            this.usesAuthMe = Class.forName("fr.xephi.authme.AuthMe") != null;
-        } catch (ClassNotFoundException ignored) {
-
-        }
-
-        try {
-            this.usesNexEngine = Class.forName("su.nexmedia.engine.NexPlugin") != null;
-        } catch (ClassNotFoundException ignored) {
-
-        }
-
-        try {
-            this.usesCustomDisplay = Class.forName("com.daxton.customdisplay.CustomDisplay") != null;
-        } catch (ClassNotFoundException ignored) {
-
         }
     }
 
@@ -188,14 +135,14 @@ public class Main extends JavaPlugin {
 
         validateConfig();
 
-        if (config.getBoolean("update-notifications") && !usesCraftBukkit) {
+        /*if (config.getBoolean("update-notifications") && !usesCraftBukkit) {
             UpdateChecker.init(this, SPIGOT_RESOURCE_ID)
                     .setDownloadLink(SPIGOT_RESOURCE_ID)
                     .setNotifyByPermissionOnJoin("fakeplayers.notify")
                     .setNotifyOpsOnJoin(true)
                     .checkEveryXHours(6)
                     .checkNow();
-        }
+        }*/
 
         if (config.getBoolean("bstats")) {
             Metrics metrics = new Metrics(this, 11025);

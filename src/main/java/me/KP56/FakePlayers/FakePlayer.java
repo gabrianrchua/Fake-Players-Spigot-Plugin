@@ -2,11 +2,7 @@ package me.KP56.FakePlayers;
 
 import me.KP56.FakePlayers.Action.Action;
 import me.KP56.FakePlayers.Action.ActionWait;
-import me.KP56.FakePlayers.MultiVersion.Version;
-import me.KP56.FakePlayers.MultiVersion.v1_12_R1;
-import me.KP56.FakePlayers.MultiVersion.v1_16_R3;
-import me.KP56.FakePlayers.MultiVersion.v1_8_R3;
-import me.KP56.FakePlayers.PluginUtils.*;
+import me.KP56.FakePlayers.MultiVersion.*;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
@@ -64,7 +60,7 @@ public class FakePlayer {
     public boolean spawn() {
 
         List<HandlerList> copy = new ArrayList<>(HandlerList.getHandlerLists());
-        if (Main.getPlugin().usesProtocolLib()) {
+        /*if (Main.getPlugin().usesProtocolLib()) {
             ProtocolLibUtils.unregisterHandlers();
         }
 
@@ -86,7 +82,7 @@ public class FakePlayer {
 
         if (Main.getPlugin().usesCustomDisplay()) {
             CustomDisplayUtils.unregisterHandlers();
-        }
+        }*/
 
         if (name.length() >= 16) {
             return false;
@@ -98,12 +94,15 @@ public class FakePlayer {
             }
         }
 
-        if (Main.getPlugin().getVersion() == Version.v1_16_R3) {
+        /*if (Main.getPlugin().getVersion() == Version.v1_16_R3) {
             entityPlayer = v1_16_R3.spawn(this);
         } else if (Main.getPlugin().getVersion() == Version.v1_12_R1) {
             entityPlayer = v1_12_R1.spawn(this);
         } else if (Main.getPlugin().getVersion() == Version.v1_8_R3) {
             entityPlayer = v1_8_R3.spawn(this);
+        }*/
+        if (Main.getPlugin().getVersion() == Version.v1_19_R1) {
+            entityPlayer = v1_19_R1.spawn(this);
         }
 
         fakePlayers.add(this);
@@ -135,12 +134,9 @@ public class FakePlayer {
     }
 
     public void removePlayer() {
-        if (Main.getPlugin().getVersion() == Version.v1_16_R3) {
-            v1_16_R3.removePlayer(this);
-        } else if (Main.getPlugin().getVersion() == Version.v1_12_R1) {
-            v1_12_R1.removePlayer(this);
-        } else if (Main.getPlugin().getVersion() == Version.v1_8_R3) {
-            v1_8_R3.removePlayer(this);
+        Version version = Main.getPlugin().getVersion();
+        if (version == Version.v1_19_R1) {
+            v1_19_R1.removePlayer(this);
         }
     }
 
